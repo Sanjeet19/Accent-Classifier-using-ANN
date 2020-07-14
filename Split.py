@@ -3,9 +3,6 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 import tensorflow as tf
 
-print('Start')
-
-
 Z = pd.read_csv('D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/Features.csv',)
 print(Z.shape)
 # print(Z)
@@ -36,11 +33,8 @@ X_train.drop(["3000", "Unnamed: 0"], axis=1, inplace=True)
 X_test.drop(["3000", "Unnamed: 0"], axis=1, inplace=True)
 X_train = tf.keras.utils.normalize(X_train.values, axis=1)
 X_test = tf.keras.utils.normalize(X_test.values, axis=1)
-print('split')
-
 
 pd.DataFrame(Y_train).to_csv("D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/Y_train.csv")
 pd.DataFrame(Y_test).to_csv("D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/Y_test.csv")
 pd.DataFrame(X_train).to_csv("D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/X_train.csv", sep=',')
 pd.DataFrame(X_test).to_csv("D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/X_test.csv", sep=',')
-print('made csv')
