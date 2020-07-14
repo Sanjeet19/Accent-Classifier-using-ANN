@@ -11,18 +11,14 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 import math
 
-print('Start')
-
-
-
-X_train=pd.read_csv('D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/X_train.csv',)
-X_train = X_train.drop('Unnamed: 0', 1)
-X_test=pd.read_csv('D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/X_test.csv',)
-X_test = X_test.drop('Unnamed: 0', 1)
-Y_train=pd.read_csv('D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/Y_train.csv',)
-Y_train = Y_train.drop('Unnamed: 0', 1)
-Y_test=pd.read_csv('D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/Y_test.csv',)
-Y_test = Y_test.drop('Unnamed: 0', 1)
+# X_train=pd.read_csv('D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/X_train.csv',)
+# X_train = X_train.drop('Unnamed: 0', 1)
+# X_test=pd.read_csv('D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/X_test.csv',)
+# X_test = X_test.drop('Unnamed: 0', 1)
+# Y_train=pd.read_csv('D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/Y_train.csv',)
+# Y_train = Y_train.drop('Unnamed: 0', 1)
+# Y_test=pd.read_csv('D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/Y_test.csv',)
+# Y_test = Y_test.drop('Unnamed: 0', 1)
 
 ncol = len(X_train.columns)
 
@@ -32,26 +28,21 @@ model = Sequential()
 
 model.add(Dense(200, input_shape=(ncol,),activation='relu'))
 
-model.add(Dropout(0.75))
+model.add(Dropout(0.25))
 model.add(Dense(150, activation='relu'))
 
-model.add(Dropout(0.75))
+model.add(Dropout(0.25))
 model.add(Dense(150, activation='relu'))
 
-model.add(Dropout(0.75))
+model.add(Dropout(0.25))
 model.add(Dense(15, activation='relu'))
 
-model.add(Dropout(0.75))
+model.add(Dropout(0.25))
 model.add(Dense(15, activation='relu'))
 
 model.add(Dense(9, activation='softmax'))
 
-print('model created')
-
 model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam')
-
-print('model compiled')
-
 
 def exp_decay(epoch):
     initial_lrate = 0.0001
@@ -80,7 +71,6 @@ rounded = [round(x[0]) for x in pred]
 
 df = pd.DataFrame(weights)
 df.to_csv('D:/Programming/Python/Audio Processing/Accent project/A Code/CSV/weights.csv', index=False)
-print('made new csv')
 
 model.fit(X_test, Y_test, batch_size=len(X_test),)
 scores = model.evaluate(X_test, Y_test)
